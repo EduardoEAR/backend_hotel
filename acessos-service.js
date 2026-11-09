@@ -20,7 +20,7 @@ var db = new sqlite3.Database("./acessos.db", (err) => {
   console.log("Conectado ao SQLite!");
 });
 
-// cria a tabela acesso (registro de logs), caso ela não exista
+// cria a tabela acesso, caso ela não exista
 db.run(
   `CREATE TABLE IF NOT EXISTS acesso
         (id INTEGER PRIMARY KEY AUTOINCREMENT, 
@@ -74,7 +74,7 @@ app.post("/acessos", async (req, res, next) => {
           console.error(err);
           res.status(500).send("Erro ao registrar acesso no banco de dados.");
         } else {
-          // Devolve a resposta final para a fechadura baseada na validação
+          // devolve a resposta final para a fechadura com base na validação
           if (acessoAutorizado) {
             console.log("Acesso Autorizado para o quarto " + quarto_numero);
             res.status(200).send("Fechadura liberada! Acesso autorizado.");
@@ -86,7 +86,7 @@ app.post("/acessos", async (req, res, next) => {
       },
     );
   } catch (erro) {
-    // microsserviço de Senhas (porta 3003) offline
+    // microsserviço de senhas (porta 3003) offline
     console.log(
       "Erro na comunicação com o microsserviço de Senhas: ",
       erro.message,
