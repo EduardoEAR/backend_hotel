@@ -39,6 +39,9 @@ db.run(
 
 // POST /senhas
 app.post("/senhas", (req, res, next) => {
+  if (typeof req.body.quarto_numero !== "number") {
+    return res.status(400).send("Erro: O número do quarto deve ser um valor numérico inteiro.");
+  }
   db.run(
     `INSERT INTO senha(codigo, pessoa_cpf, quarto_numero, data_inicio, data_fim) VALUES(?,?,?,?,?)`,
     [
