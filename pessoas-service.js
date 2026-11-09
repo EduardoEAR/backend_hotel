@@ -88,6 +88,9 @@ app.get("/pessoas/:cpf", (req, res, next) => {
 
 // PATCH /pessoas/<cpf>
 app.patch("/pessoas/:cpf", (req, res, next) => {
+  if (req.body.cpf && req.body.cpf !== req.params.cpf) {
+    return res.status(400).send("Erro: Não é permitido alterar o CPF de uma pessoa já cadastrada.");
+  }
   db.run(
     `UPDATE pessoa SET nome = COALESCE(?,nome), tipo_perfil = COALESCE(?,tipo_perfil) WHERE cpf = ?`,
     [req.body.nome, req.body.tipo_perfil, req.params.cpf],
