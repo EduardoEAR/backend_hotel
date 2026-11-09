@@ -77,10 +77,10 @@ app.post("/acessos", async (req, res, next) => {
           // devolve a resposta final para a fechadura com base na validação
           if (acessoAutorizado) {
             console.log("Acesso Autorizado para o quarto " + quarto_numero);
-            res.status(200).send("Fechadura liberada! Acesso autorizado.");
+            res.status(200).send("Acesso autorizado: fechadura liberada");
           } else {
             console.log("Acesso Negado para o quarto " + quarto_numero);
-            res.status(401).send("Acesso negado. Senha incorreta ou expirada.");
+            res.status(401).send("Acesso negado: senha incorreta ou expirada.");
           }
         }
       },
